@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :check_is_logged, only: [:new, :edit]
 
   # GET /users
   # GET /users.json
@@ -71,4 +72,12 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:username, :password)
     end
+
+    def check_is_logged
+      unless logged_in?
+        flash[:danger] = "You must be logged to view this page"
+        redirect_to root_path
+      end
+    end
+
 end
