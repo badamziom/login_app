@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
+
   resources :tests
+
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#logout'
+
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
